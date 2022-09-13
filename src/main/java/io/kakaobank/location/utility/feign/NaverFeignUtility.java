@@ -13,6 +13,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface NaverFeignUtility {
     @GetMapping(path = "/v1/search/local.json")
     NaverLocationSearchDTO searchLocationByKeyword(
-            @RequestParam String query,
-            @RequestParam(value = "display") Integer pageSize);
+            @RequestParam String query, @RequestParam(value = "display") Integer pageSize);
 }

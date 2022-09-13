@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class ResponseData {
-    private String successOrNot;
+    private String message;
     private Object data;
 
     @Builder
-    public ResponseData(String successOrNot, Object data) {
-        this.successOrNot = successOrNot;
+    public ResponseData(String message, Object data) {
+        this.message = message;
         this.data = data;
     }
 }

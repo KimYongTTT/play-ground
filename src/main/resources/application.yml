@@ -19,7 +19,7 @@ app:
     naver:
       url: "https://openapi.naver.com"
       clientId: "lPXdEZfpMIvgZJB1UfX7"
-      clientSecret: "5yf3BpB5rO"
+      clientSecret: "Ucle4yj6uc"
 
 feign:
   httpclient:

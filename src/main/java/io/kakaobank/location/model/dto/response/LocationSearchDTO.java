@@ -1,11 +1,11 @@
 package io.kakaobank.location.model.dto.response;
 
-import java.util.List;
+import java.util.Collection;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
 public class LocationSearchDTO {
-    private List<String> searchResultList;
+    private Collection<SearchResult> locations;
 }

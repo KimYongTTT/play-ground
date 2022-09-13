@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
         configuration = KakaoFeignConfig.class)
 public interface KakaoFeignUtility {
     @GetMapping(path = "/v2/local/search/keyword.json")
-    KakaoLocationSearchDTO searchLocationByKeyword(@RequestParam String query,
-    @RequestParam(value = "size") Integer pageSize);
+    KakaoLocationSearchDTO searchLocationByKeyword(
+            @RequestParam String query, @RequestParam(value = "size") Integer pageSize);
 }

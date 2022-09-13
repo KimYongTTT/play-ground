@@ -8,7 +8,7 @@ public class NaverFeignConfig {
     @Value("${app.api.naver.clientId}")
     private String clientId;
 
-    @Value("{app.api.naver.clientSecret}")
+    @Value("${app.api.naver.clientSecret}")
     private String clientSecret;
 
     @Bean
