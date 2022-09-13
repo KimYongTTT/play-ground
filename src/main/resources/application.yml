@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/kakaobank?useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: kakobank2022
+server:
+  port: 4000
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+app:
+  api:
+    kakao:
+      url: "https://dapi.kakao.com"
+      key: "KakaoAK d4e6fbfeb0c1dfbf800646b0ddd3f49a"
+    naver:
+      url: "https://openapi.naver.com"
+      clientId: "lPXdEZfpMIvgZJB1UfX7"
+      clientSecret: "5yf3BpB5rO"
+
+feign:
+  httpclient:
+    disableSslValidation: true
+  client:
+    config:
+      default:
+        connect-timeout: 30000
+        read-timeout: 30000
+        loggerLevel: FULL
