@@ -12,7 +12,6 @@ import java.util.Objects;
 @Getter
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class SearchResult {
     private String locationName;
 
