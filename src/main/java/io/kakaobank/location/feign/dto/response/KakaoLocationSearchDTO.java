@@ -1,4 +1,4 @@
-package io.kakaobank.location.model.dto.feign.response;
+package io.kakaobank.location.feign.dto.response;
 
 import static io.kakaobank.location.utility.StringUtility.removeHtmlTags;
 

@@ -1,2 +1,6 @@
-GET http://localhost:4000/v1/kakaobank/search/locations?keyword=a
+GET http://localhost:4000/v1/kakaobank/search/keywords
+Accept: application/json
+
+###
+GET http://localhost:4000/v1/kakaobank/search/locations?keyword=선릉
 Accept: application/json

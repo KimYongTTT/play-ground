@@ -1,4 +1,6 @@
-package io.kakaobank.location.model.dto.feign.response;
+package io.kakaobank.location.feign.dto.response;
+
+import static io.kakaobank.location.utility.StringUtility.removeHtmlTags;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.ToString;
-
-import static io.kakaobank.location.utility.StringUtility.removeHtmlTags;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)

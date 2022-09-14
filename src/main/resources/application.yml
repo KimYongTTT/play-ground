@@ -2,7 +2,20 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kakaobank?useSSL=false&createDatabaseIfNotExist=true
     username: root
-    password: kakobank2022
+    password: kakaobank2022
+  flyway:
+    url: jdbc:mysql://localhost:3306/kakaobank?useSSL=false&createDatabaseIfNotExist=true
+    user: root
+    password: kakaobank2022
+    locations: classpath:/db/migration/common_sql,classpath:/db/migration/env_sql
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
 server:
   port: 4000
   servlet:

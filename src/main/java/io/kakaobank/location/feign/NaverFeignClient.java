@@ -1,7 +1,7 @@
-package io.kakaobank.location.utility.feign;
+package io.kakaobank.location.feign;
 
 import io.kakaobank.location.config.NaverFeignConfig;
-import io.kakaobank.location.model.dto.feign.response.NaverLocationSearchDTO;
+import io.kakaobank.location.feign.dto.response.NaverLocationSearchDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
         name = "naverFeignUtility",
         url = "${app.api.naver.url}",
         configuration = NaverFeignConfig.class)
-public interface NaverFeignUtility {
+public interface NaverFeignClient {
     @GetMapping(path = "/v1/search/local.json")
     NaverLocationSearchDTO searchLocationByKeyword(
             @RequestParam String query, @RequestParam(value = "display") Integer pageSize);
