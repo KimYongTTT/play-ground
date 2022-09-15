@@ -8,7 +8,10 @@ import org.springframework.http.ResponseEntity;
 @UtilityClass
 public class ResponseUtility {
     public ResponseEntity<ResponseData> createGetSuccessResponse(Object data) {
-        return new ResponseEntity<>(
-                ResponseData.builder().message("Success").data(data).build(), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseData.successResponseData(data), HttpStatus.OK);
+    }
+
+    public ResponseEntity<ResponseData> createGetFailResponse(String message) {
+        return new ResponseEntity<>(ResponseData.failResponseData(message), HttpStatus.OK);
     }
 }

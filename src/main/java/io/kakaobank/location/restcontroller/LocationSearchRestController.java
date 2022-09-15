@@ -17,7 +17,7 @@ public class LocationSearchRestController {
     @GetMapping(path = "/v1/kakaobank/search/locations")
     public ResponseEntity<ResponseData> searchLocation(@RequestParam String keyword) {
         return ResponseUtility.createGetSuccessResponse(
-                locationSearchService.searchLocation(keyword));
+                locationSearchService.searchLocation(keyword.trim()));
     }
 
     @GetMapping(path = "/v1/kakaobank/search/keywords")

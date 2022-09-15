@@ -1,5 +1,6 @@
 package io.kakaobank.location.model.entity;
 
+import java.time.OffsetDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,35 +9,31 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Getter
 @NoArgsConstructor
-@ToString
 public class SearchKeyword {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "keyword", nullable = false, unique = true)
+    @Column(name = "keyword", unique = true)
     private String keyword;
 
-    @Column(name = "hit", nullable = false)
+    @Column(name = "hit")
     private Long hit;
+
+    @Column(name = "last_search_datetime")
+    private OffsetDateTime lastSearchDatetime;
 
     @Builder
     public SearchKeyword(String keyword) {
         this.keyword = keyword;
-        this.hit = 0L;
     }
 
     public static SearchKeyword newSearchKeyword(String keyword) {
         return SearchKeyword.builder().keyword(keyword).build();
-    }
-
-    public void hit() {
-        this.hit += 1;
     }
 }
