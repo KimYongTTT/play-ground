@@ -24,6 +24,7 @@ server:
       charset: UTF-8
       enabled: true
       force: true
+  shutdown: graceful
 app:
   api:
     kakao:
@@ -35,6 +36,8 @@ app:
       clientSecret: "Ucle4yj6uc"
 
 feign:
+  circuitbreaker:
+    enabled: true
   httpclient:
     disableSslValidation: true
   client:

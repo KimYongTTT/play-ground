@@ -1,10 +1,9 @@
 package io.kakaobank.location.service;
 
-import io.kakaobank.location.feign.KakaoFeignClient;
-import io.kakaobank.location.feign.NaverFeignClient;
-import io.kakaobank.location.model.dto.response.KeywordListDTO;
-import io.kakaobank.location.model.dto.response.LocationSearchDTO;
-import io.kakaobank.location.model.dto.response.SearchResult;
+import io.kakaobank.location.feign.kakao.KakaoFeignClient;
+import io.kakaobank.location.feign.naver.NaverFeignClient;
+import io.kakaobank.location.model.dto.response.Keyword;
+import io.kakaobank.location.model.dto.response.Location;
 import io.kakaobank.location.repository.SearchKeywordRepository;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,49 +21,55 @@ public class LocationSearchService {
     private final NaverFeignClient naverFeignClient;
     private final SearchKeywordRepository searchKeywordRepository;
 
-    private static final Integer MAX_PAGING_SIZE = 5;
+    private static final Integer LOCATION_SEARCH_RESULT_SIZE = 10;
+    private static final Integer NAVER_MAX_PAGING_SIZE = 5;
 
     // TODO spring api caching 이용
-    // open feign circuit breaker 이용, 연동 API 장애 handle
-    // API 자체의 exception handle
-    //
+    // API 자체의 exception handle --> empty result maybe? kakao and naver both
+    // open feign resillienceJ circuit breaker 추가 완료, read time out 에 대한 처리..?
     @Transactional
-    public LocationSearchDTO searchLocation(final String keyword) {
+    public List<Location> searchLocation(final String keyword) {
         searchKeywordRepository.insertOrUpdateKeywordHit(keyword);
 
-        List<SearchResult> kakaoResult = kakaoLocationSearchBy(keyword, MAX_PAGING_SIZE);
-        List<SearchResult> naverResult = naverLocationSearchBy(keyword, MAX_PAGING_SIZE);
+        List<Location> naverResult = naverLocationSearchBy(keyword, NAVER_MAX_PAGING_SIZE);
+        List<Location> kakaoResult =
+                kakaoLocationSearchBy(keyword, LOCATION_SEARCH_RESULT_SIZE - naverResult.size());
+
         log.info(kakaoResult.toString());
         log.info(naverResult.toString());
 
-        return LocationSearchDTO.builder()
-                .locations(sortAndCombineSearchResults(kakaoResult, naverResult))
-                .build();
+        return sortAndCombineSearchResults(kakaoResult, naverResult);
     }
 
     @Transactional(readOnly = true)
-    public List<KeywordListDTO> getKeywords() {
+    public List<Keyword> getKeywords() {
         return searchKeywordRepository.findTop10ByOrderByHitDesc().stream()
-                .map(KeywordListDTO::from)
+                .map(Keyword::from)
                 .collect(Collectors.toList());
     }
 
-    public List<SearchResult> kakaoLocationSearchBy(final String keyword, final Integer pageSize) {
-        return kakaoFeignClient.searchLocationByKeyword(keyword, pageSize).toResultList();
+    public List<Location> kakaoLocationSearchBy(final String keyword, final Integer pageSize) {
+        return kakaoFeignClient.searchLocationByKeyword(keyword, pageSize).toLocationList();
     }
 
-    public List<SearchResult> naverLocationSearchBy(final String keyword, final Integer pageSize) {
-        return naverFeignClient.searchLocationByKeyword(keyword, pageSize).toResultList();
+    public List<Location> naverLocationSearchBy(final String keyword, final Integer pageSize) {
+        return naverFeignClient.searchLocationByKeyword(keyword, pageSize).toLocationList();
     }
 
-    private LinkedHashSet<SearchResult> sortAndCombineSearchResults(
-            List<SearchResult> kakaoResult, List<SearchResult> naverResult) {
-        LinkedHashSet<SearchResult> combinedResult = new LinkedHashSet<>(kakaoResult);
+    private <T> List<T> sortAndCombineSearchResults(
+            List<T> kakaoResult, List<T>... otherSeachResults) {
+        LinkedHashSet<T> combinedResult = new LinkedHashSet<>(kakaoResult);
 
-        combinedResult.retainAll(naverResult);
+        for (List<T> otherResult : otherSeachResults) {
+            combinedResult.retainAll(otherResult);
+        }
+
         combinedResult.addAll(kakaoResult);
-        combinedResult.addAll(naverResult);
 
-        return combinedResult;
+        for (List<T> otherResult : otherSeachResults) {
+            combinedResult.addAll(otherResult);
+        }
+
+        return combinedResult.stream().collect(Collectors.toList());
     }
 }

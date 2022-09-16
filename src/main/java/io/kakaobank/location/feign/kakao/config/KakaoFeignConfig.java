@@ -1,4 +1,4 @@
-package io.kakaobank.location.config;
+package io.kakaobank.location.feign.kakao.config;
 
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;

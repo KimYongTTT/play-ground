@@ -1,11 +1,12 @@
-package io.kakaobank.location.feign.dto.response;
+package io.kakaobank.location.feign.kakao.dto;
 
 import static io.kakaobank.location.utility.StringUtility.removeHtmlTags;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.kakaobank.location.model.dto.response.SearchResult;
+import io.kakaobank.location.model.dto.response.Location;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.*;
@@ -22,9 +23,15 @@ public class KakaoLocationSearchDTO {
         private String placeName;
     }
 
-    public List<SearchResult> toResultList() {
+    public static KakaoLocationSearchDTO empty() {
+        return new KakaoLocationSearchDTO();
+    }
+
+    public List<Location> toLocationList() {
+        if (documents == null) return Collections.emptyList();
+
         return Arrays.stream(documents)
-                .map(document -> new SearchResult(removeHtmlTags(document.placeName)))
+                .map(document -> new Location(removeHtmlTags(document.placeName)))
                 .collect(Collectors.toList());
     }
 }

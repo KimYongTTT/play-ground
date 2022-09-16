@@ -10,8 +10,8 @@ import lombok.ToString;
 @Getter
 @AllArgsConstructor
 @ToString
-public class SearchResult {
-    private String locationName;
+public class Location {
+    private String name;
 
     @Override
     public boolean equals(Object o) {
@@ -19,18 +19,17 @@ public class SearchResult {
             return true;
         }
 
-        if (!(o instanceof SearchResult)) {
+        if (!(o instanceof Location)) {
             return false;
         }
 
-        SearchResult anotherResult = (SearchResult) o;
+        Location anotherLocation = (Location) o;
 
-        return removeWhiteSpace(locationName)
-                .equals(removeWhiteSpace((anotherResult.locationName)));
+        return removeWhiteSpace(name).equals(removeWhiteSpace((anotherLocation.name)));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(locationName);
+        return Objects.hash(name);
     }
 }

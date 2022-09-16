@@ -1,7 +1,7 @@
-package io.kakaobank.location.feign;
+package io.kakaobank.location.feign.kakao;
 
-import io.kakaobank.location.config.KakaoFeignConfig;
-import io.kakaobank.location.feign.dto.response.KakaoLocationSearchDTO;
+import io.kakaobank.location.feign.kakao.config.KakaoFeignConfig;
+import io.kakaobank.location.feign.kakao.dto.KakaoLocationSearchDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(
         name = "kakaoFeign",
         url = "${app.api.kakao.url}",
-        configuration = KakaoFeignConfig.class)
+        configuration = KakaoFeignConfig.class,
+        fallbackFactory = KakaoFeignClientFallbackFactory.class)
 public interface KakaoFeignClient {
     @GetMapping(path = "/v2/local/search/keyword.json")
     KakaoLocationSearchDTO searchLocationByKeyword(

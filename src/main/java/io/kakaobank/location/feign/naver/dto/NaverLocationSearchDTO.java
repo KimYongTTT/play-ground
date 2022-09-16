@@ -1,11 +1,12 @@
-package io.kakaobank.location.feign.dto.response;
+package io.kakaobank.location.feign.naver.dto;
 
 import static io.kakaobank.location.utility.StringUtility.removeHtmlTags;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.kakaobank.location.model.dto.response.SearchResult;
+import io.kakaobank.location.model.dto.response.Location;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -23,9 +24,15 @@ public class NaverLocationSearchDTO {
         private String title;
     }
 
-    public List<SearchResult> toResultList() {
+    public static NaverLocationSearchDTO empty() {
+        return new NaverLocationSearchDTO();
+    }
+
+    public List<Location> toLocationList() {
+        if (items == null) return Collections.emptyList();
+
         return Arrays.stream(items)
-                .map(item -> new SearchResult(removeHtmlTags(item.title)))
+                .map(item -> new Location(removeHtmlTags(item.title)))
                 .collect(Collectors.toList());
     }
 }

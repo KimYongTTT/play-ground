@@ -7,19 +7,19 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class KeywordListDTO {
+public class Keyword {
     private String keyword;
 
     private Long hit;
 
     @Builder
-    public KeywordListDTO(String keyword, Long hit) {
+    public Keyword(String keyword, Long hit) {
         this.keyword = keyword;
         this.hit = hit;
     }
 
-    public static KeywordListDTO from(SearchKeyword searchKeyword) {
-        return KeywordListDTO.builder()
+    public static Keyword from(SearchKeyword searchKeyword) {
+        return Keyword.builder()
                 .keyword(searchKeyword.getKeyword())
                 .hit(searchKeyword.getHit())
                 .build();
