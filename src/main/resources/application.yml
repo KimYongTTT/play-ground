@@ -16,6 +16,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  aop:
+    proxy-target-class: true
 server:
   port: 4000
   servlet:

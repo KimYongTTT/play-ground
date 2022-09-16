@@ -15,11 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SearchKeyword {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
-
-    @Column(name = "keyword", unique = true)
+    @Column(name = "keyword")
     private String keyword;
 
     @Column(name = "hit")

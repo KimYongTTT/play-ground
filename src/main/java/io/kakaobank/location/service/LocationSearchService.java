@@ -27,7 +27,7 @@ public class LocationSearchService {
     // TODO spring api caching 이용
     // API 자체의 exception handle --> empty result maybe? kakao and naver both
     // open feign resillienceJ circuit breaker 추가 완료, read time out 에 대한 처리..?
-    @Transactional
+
     public List<Location> searchLocation(final String keyword) {
         searchKeywordRepository.insertOrUpdateKeywordHit(keyword);
 

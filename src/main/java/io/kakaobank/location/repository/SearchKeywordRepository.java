@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import javax.transaction.Transactional;
+
 public interface SearchKeywordRepository extends JpaRepository<SearchKeyword, Long> {
     List<SearchKeyword> findTop10ByOrderByHitDesc();
 
+    @Transactional
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query(
             value =
