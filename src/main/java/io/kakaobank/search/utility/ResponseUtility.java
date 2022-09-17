@@ -12,6 +12,6 @@ public class ResponseUtility {
     }
 
     public ResponseEntity<ResponseData> createGetFailResponse(String message) {
-        return new ResponseEntity<>(ResponseData.failResponseData(message), HttpStatus.OK);
+        return new ResponseEntity<>(ResponseData.failResponseData(message), HttpStatus.NOT_FOUND);
     }
 }
