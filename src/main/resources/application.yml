@@ -18,6 +18,7 @@ spring:
         format_sql: true
   aop:
     proxy-target-class: true
+
 server:
   port: 4000
   servlet:
@@ -27,6 +28,7 @@ server:
       enabled: true
       force: true
   shutdown: graceful
+
 app:
   api:
     kakao:
@@ -36,7 +38,6 @@ app:
       url: "https://openapi.naver.com"
       clientId: "lPXdEZfpMIvgZJB1UfX7"
       clientSecret: "Ucle4yj6uc"
-
 feign:
   circuitbreaker:
     enabled: true
@@ -48,3 +49,7 @@ feign:
         connect-timeout: 30000
         read-timeout: 30000
         loggerLevel: FULL
+
+logging:
+  level:
+    io: debug

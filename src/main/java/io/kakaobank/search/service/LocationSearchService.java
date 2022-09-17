@@ -20,11 +20,11 @@ import org.springframework.stereotype.Service;
 public class LocationSearchService implements BaseSearchService {
     private final KakaoFeignClient kakaoFeignClient;
     private final NaverFeignClient naverFeignClient;
-    private final CacheManager cacheManager;
 
-    // TODO spring api caching 이용
-    // API 자체의 exception handle --> empty result maybe? kakao and naver both
-    // open feign resillienceJ circuit breaker 추가 완료, read time out 에 대한 처리..?
+    // TODO
+    // module 테스트용 데이터?
+    // caching 적용 전, 후 http response time
+    // feign read time out 에 대한 처리..?
 
     @Override
     @Cacheable(value = LOCATION_CACHE, key = "#keyword")
@@ -33,14 +33,7 @@ public class LocationSearchService implements BaseSearchService {
         List<Location> kakaoResult =
                 kakaoLocationSearchBy(keyword, LOCATION_SEARCH_RESULT_SIZE - naverResult.size());
 
-        log.info(kakaoResult.toString());
-        log.info(naverResult.toString());
-        List<Location> returnLocationList = sortAndCombineSearchResults(kakaoResult, naverResult);
-
-        // CacheUpdate
-        cacheManager.getCache(LOCATION_CACHE).putIfAbsent(keyword, returnLocationList);
-
-        return returnLocationList;
+        return sortAndCombineSearchResults(kakaoResult, naverResult);
     }
 
     public List<Location> kakaoLocationSearchBy(final String keyword, final Integer pageSize) {
