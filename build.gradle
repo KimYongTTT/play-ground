@@ -26,6 +26,8 @@ dependencies {
     implementation 'org.flywaydb:flyway-mysql'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'com.github.ben-manes.caffeine:caffeine'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'mysql:mysql-connector-java'
@@ -49,12 +51,6 @@ spotless {
         importOrder 'java', 'javax', 'org', 'com', ''
         removeUnusedImports()
         googleJavaFormat('1.7').aosp()
-        indentWithSpaces(2)
-        trimTrailingWhitespace()
-        endWithNewline()
-    }
-    format 'misc', {
-        target '**/*.yml', '**/*.gradle', '**/*.md', '**/.gitignore'
         indentWithSpaces(2)
         trimTrailingWhitespace()
         endWithNewline()

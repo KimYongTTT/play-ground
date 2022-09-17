@@ -2,6 +2,7 @@ package io.kakaobank.location.restcontroller;
 
 import io.kakaobank.location.model.common.ResponseData;
 import io.kakaobank.location.service.LocationSearchService;
+import io.kakaobank.location.service.SearchKeywordService;
 import io.kakaobank.location.utility.ResponseUtility;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class LocationSearchRestController {
     private final LocationSearchService locationSearchService;
 
+    private final SearchKeywordService searchKeywordService;
+
     @GetMapping(path = "/v1/kakaobank/search/locations")
     public ResponseEntity<ResponseData> searchLocation(@RequestParam String keyword) {
+        searchKeywordService.addKeyword(keyword);
         return ResponseUtility.createGetSuccessResponse(
-                locationSearchService.searchLocation(keyword.trim()));
+                locationSearchService.searchByKeyword(keyword.trim()));
     }
 
     @GetMapping(path = "/v1/kakaobank/search/keywords")
     public ResponseEntity<ResponseData> getKeywords() {
-        return ResponseUtility.createGetSuccessResponse(locationSearchService.getKeywords());
+        return ResponseUtility.createGetSuccessResponse(searchKeywordService.getTop10Keywords());
     }
 }
