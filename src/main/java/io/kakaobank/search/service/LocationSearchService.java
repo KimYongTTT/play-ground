@@ -26,6 +26,10 @@ public class LocationSearchService implements BaseSearchService {
         List<Location> kakaoResult =
                 kakaoLocationSearchBy(keyword, LOCATION_SEARCH_RESULT_SIZE - naverResult.size());
 
+        //ONLY FOR TESTING
+        log.info("Result From Naver " + naverResult);
+        log.info("Result From Kakao " + kakaoResult);
+
         return sortAndCombineSearchResults(kakaoResult, naverResult);
     }
 

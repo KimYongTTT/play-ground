@@ -1,6 +1,7 @@
 ## Getting Started
 
 ### 1. Local DB
+로컬 저장소를 위해 Mysql Docker Container 를 기동한다.
 #### (For Apple silicon)
 
 > Mysql Docker Container 기동
@@ -22,9 +23,13 @@
     docker-compose down -v
 ```
 ### 2. Spring Boot App Run
+(Mysql Docker Container 기동이 완전히 완료된 후에 수행, 환경에 따라 수 분 소요될 수 있음)
+
 IDE 로 Spring Boot App 을 기동하거나 아래의 gradlew 명령어로 어플리케이션 기동
 ```
   ./gradelw bootrun
+  
+  ./gradlew -stop (Application 종료)
 ```
 App 이 기동되며 Flyway 스크립트로 테이블 스키마 생성됨
 
