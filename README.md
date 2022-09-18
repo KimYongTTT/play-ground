@@ -58,13 +58,15 @@ HTTP Request file 로 테스트 가능
 
     검색 API 제공자별로 Feign Client 패키지 분리 구성, 필요한 모델 및 Fallback 메소드 독립적으로 추가가능
   
-    검색 서비스별 데이터 취합시, KAKAO 를 제외한 Others 파라미터를 List 로 받아 로직 변경사항 없이도 데이터 취합 및 정렬 가능
+    검색 서비스별 데이터 취합시, KAKAO 를 제외한 Others 파라미터를 List 로 받아 로직 변경사항 없이도 데이터 취합 및 정렬
   
 4. 대용량 트래픽 처리를 위한 반응성(Low Latency), 확장성(Scalability), 가용성(Availability)을 높이기 위한 고려
 
     장소검색 API 의 경우, keyword 에 대한 검색결과가 빈번히 바뀌지 않을것으로 예상됨. Caffeine Cache 이용하여
   
     Keyword 에 해당하는 장소에 대한 1시간 expiretime 을 가진 캐싱 데이터 생성
+    
+    "서울" 키워드 검색시, 캐싱 전 (412 ms) --> 캐싱 후 (32 ms) 로 Reponse Time 개선
   
 5. 지속적 유지 보수 및 확장에 용이한 아키텍처에 대한 설계
 
