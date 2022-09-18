@@ -1,4 +1,4 @@
-package io.kakaobank.search.restcontroller;
+package io.kakaobank.search.restcontroller.advice;
 
 import io.kakaobank.search.model.common.ResponseData;
 import javax.validation.ConstraintViolationException;

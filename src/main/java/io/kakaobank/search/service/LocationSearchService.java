@@ -1,8 +1,7 @@
 package io.kakaobank.search.service;
 
 import static io.kakaobank.search.constants.CacheName.LOCATION_CACHE;
-import static io.kakaobank.search.constants.SearchConstants.LOCATION_SEARCH_RESULT_SIZE;
-import static io.kakaobank.search.constants.SearchConstants.NAVER_MAX_PAGING_SIZE;
+import static io.kakaobank.search.constants.SearchConstants.*;
 
 import io.kakaobank.search.feign.kakao.KakaoFeignClient;
 import io.kakaobank.search.feign.naver.NaverFeignClient;
@@ -20,15 +19,10 @@ public class LocationSearchService implements BaseSearchService {
     private final KakaoFeignClient kakaoFeignClient;
     private final NaverFeignClient naverFeignClient;
 
-    // TODO
-    // module 테스트용 데이터?
-    // caching 적용 전, 후 http response time
-    // feign read time out 에 대한 처리..?
-
     @Override
     @Cacheable(value = LOCATION_CACHE, key = "#keyword")
     public List<Location> searchByKeyword(final String keyword) {
-        List<Location> naverResult = naverLocationSearchBy(keyword, NAVER_MAX_PAGING_SIZE);
+        List<Location> naverResult = naverLocationSearchBy(keyword, DEFAULT_PAGING_SIZE);
         List<Location> kakaoResult =
                 kakaoLocationSearchBy(keyword, LOCATION_SEARCH_RESULT_SIZE - naverResult.size());
 

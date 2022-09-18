@@ -50,6 +50,12 @@ feign:
         read-timeout: 30000
         loggerLevel: FULL
 
+springdoc:
+  swagger-ui:
+    operations-sorter: alpha
+    tags-sorter: alpha
+    doc-expansion: list
+
 logging:
   level:
     io: debug

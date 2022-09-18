@@ -2,6 +2,7 @@ package io.kakaobank.search.model.dto.response;
 
 import static io.kakaobank.search.utility.StringUtility.removeWhiteSpace;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Location {
+    @Schema(name = "name", description = "장소 이름", example = "덕수궁")
     private String name;
 
     @Override
