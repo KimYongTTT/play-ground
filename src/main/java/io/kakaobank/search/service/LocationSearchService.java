@@ -5,7 +5,7 @@ import static io.kakaobank.search.constants.SearchConstants.*;
 
 import io.kakaobank.search.feign.kakao.KakaoFeignClient;
 import io.kakaobank.search.feign.naver.NaverFeignClient;
-import io.kakaobank.search.model.dto.response.Location;
+import io.kakaobank.search.model.dto.Location;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class LocationSearchService implements BaseSearchService {
         List<Location> kakaoResult =
                 kakaoLocationSearchBy(keyword, LOCATION_SEARCH_RESULT_SIZE - naverResult.size());
 
-        //ONLY FOR TESTING
+        // ONLY FOR TESTING
         log.info("Result From Naver " + naverResult);
         log.info("Result From Kakao " + kakaoResult);
 

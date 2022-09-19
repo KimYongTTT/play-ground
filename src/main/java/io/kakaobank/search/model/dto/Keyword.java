@@ -1,4 +1,4 @@
-package io.kakaobank.search.model.dto.response;
+package io.kakaobank.search.model.dto;
 
 import io.kakaobank.search.model.entity.SearchKeyword;
 import io.swagger.v3.oas.annotations.media.Schema;

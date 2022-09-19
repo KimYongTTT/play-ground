@@ -1,4 +1,4 @@
-package io.kakaobank.search.model.dto.response;
+package io.kakaobank.search.model.dto;
 
 import static io.kakaobank.search.utility.StringUtility.removeWhiteSpace;
 

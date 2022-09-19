@@ -1,17 +1,17 @@
 package io.kakaobank.search.utility;
 
-import io.kakaobank.search.model.common.ResponseData;
+import io.kakaobank.search.model.common.BaseResponse;
 import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @UtilityClass
 public class ResponseUtility {
-    public ResponseEntity<ResponseData> createGetSuccessResponse(Object data) {
-        return new ResponseEntity<>(ResponseData.successResponseData(data), HttpStatus.OK);
+    public ResponseEntity<BaseResponse> createGetSuccessResponse(Object data) {
+        return new ResponseEntity<>(BaseResponse.successResponse(data), HttpStatus.OK);
     }
 
-    public ResponseEntity<ResponseData> createGetFailResponse(String message) {
-        return new ResponseEntity<>(ResponseData.failResponseData(message), HttpStatus.NOT_FOUND);
+    public ResponseEntity<BaseResponse> createFailResponse(String message, HttpStatus httpStatus) {
+        return new ResponseEntity<>(BaseResponse.failResponse(message), httpStatus);
     }
 }

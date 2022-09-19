@@ -4,7 +4,7 @@ import static io.kakaobank.search.utility.StringUtility.removeHtmlTags;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.kakaobank.search.model.dto.response.Location;
+import io.kakaobank.search.model.dto.Location;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;

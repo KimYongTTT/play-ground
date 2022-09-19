@@ -1,6 +1,6 @@
 package io.kakaobank.search.service;
 
-import io.kakaobank.search.model.dto.response.Keyword;
+import io.kakaobank.search.model.dto.Keyword;
 import io.kakaobank.search.repository.SearchKeywordRepository;
 import java.util.List;
 import java.util.stream.Collectors;
