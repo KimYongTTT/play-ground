@@ -3,6 +3,9 @@ spring:
     url: jdbc:mysql://localhost:3306/kakaobank?useSSL=false&createDatabaseIfNotExist=true
     username: root
     password: kakaobank2022
+    hikari:
+      connection-timeout: 100000
+      maximum-pool-size: 100
   flyway:
     url: jdbc:mysql://localhost:3306/kakaobank?useSSL=false&createDatabaseIfNotExist=true
     user: root
@@ -10,7 +13,7 @@ spring:
     locations: classpath:/db/migration/common_sql,classpath:/db/migration/env_sql
   jpa:
     database: mysql
-    show-sql: true
+#    show-sql: true
     hibernate:
       ddl-auto: none
     properties:
@@ -58,4 +61,4 @@ springdoc:
 
 logging:
   level:
-    io: debug
+    io: info
